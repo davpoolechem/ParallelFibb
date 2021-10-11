@@ -1,12 +1,12 @@
 CC=g++
-CFLAGS=-I. -O3
-
 LINKER=g++
-LDFLAGS=-lpthread
 
 SRCDIR = src
 OBJDIR = obj
 BINDIR = bin
+
+CFLAGS=-I. -I$(SRCDIR) -O3 -g
+LDFLAGS=-lpthread
 
 rm = rm
 
