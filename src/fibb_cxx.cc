@@ -1,6 +1,6 @@
+#include <future>
 #include <iostream>
 #include <thread>
-#include <future>
 #include <unistd.h>
 
 long long int fibo(long long int n) {
@@ -14,7 +14,7 @@ long long int fibo(long long int n) {
 	}
 }
 
-int main() {
-	long long int n = 10;	
+int main(int argc, char* argv[]) {
+	long long int n = atoll(argv[1]);	
 	std::cout << "The " << n <<"th number in the Fibonacci serries is " << fibo(n) << std::endl;
 }
