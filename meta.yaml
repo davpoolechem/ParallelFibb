@@ -1,0 +1,11 @@
+package:
+  name: fibb
+  version: "1.0.0"
+
+source:
+  path: ./
+
+requirements:
+  build:
+    - make
+    - {{ compiler('cxx') }}
