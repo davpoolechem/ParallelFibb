@@ -16,7 +16,6 @@ class RecursiveFibonacci {
 
   Algorithm algorithm_; //algorithm to use
   int openmp_threads_; //number of threads to use for OpenMP algorithm
-
   
 public:
   //-- constructors and destructors --//
@@ -64,7 +63,9 @@ public:
           }
         }
         break;
-      case Algorithm::SERIAL: throw std::runtime_error("Algorithm SERIAL not implemented yet!"); break;
+      case Algorithm::SERIAL: 
+        val_ = fibo_serial(n_); 
+        break;
       default: throw std::invalid_argument("Specified algorithm does not exist!"); break;
     }
     auto end_time = std::chrono::system_clock::now();
@@ -103,6 +104,15 @@ private:
       #pragma omp taskwait
 
       return tmp1 + tmp2;
+    }
+  }
+
+  static long long int fibo_serial(long long int n) {
+	  int tmp = work_function(25);
+    if(n <= 1) {
+      return n + tmp - tmp;
+    } else {
+      return fibo_serial(n-1) + fibo_serial(n-2);
     }
   }
   

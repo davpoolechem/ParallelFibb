@@ -10,6 +10,7 @@ int main(int argc, char* argv[]) {
   std::unordered_map<Algorithm, std::string> algorithms; 
   algorithms[Algorithm::CXX] = "CXX";
   algorithms[Algorithm::OPENMP] = "OPENMP";
+  algorithms[Algorithm::SERIAL] = "SERIAL";
   
   RecursiveFibonacci fibb_eng = RecursiveFibonacci(n-1);
   for (auto algorithm : algorithms) {
