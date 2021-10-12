@@ -1,24 +1,29 @@
+#include <chrono>
 #include <future>
 #include <thread>
 #include <unistd.h>
 
 enum class Algorithm {
-  CXX,
-  OPENMP,
-  SERIAL
+  CXX, 
+  OPENMP, 
+  SERIAL, 
 };
 
 class RecursiveFibonacci {
   long long int n_; //fibonacci number of calculate
   long long int val_; //value of n_'th fibonacci number
-  Algorithm algorithm_; //algorithm to use
-  int openmp_threads_;
+  double elapsed_; //time elapsed during calculation  
 
+  Algorithm algorithm_; //algorithm to use
+  int openmp_threads_; //number of threads to use for OpenMP algorithm
+
+  
 public:
   //-- constructors and destructors --//
   RecursiveFibonacci(long long int n, Algorithm algorithm=Algorithm::CXX,
     int openmp_threads=4) 
-  : n_(n), val_(0), algorithm_(algorithm), openmp_threads_(openmp_threads) { }
+  : n_(n), val_(0), elapsed_(0.0), algorithm_(algorithm), 
+    openmp_threads_(openmp_threads) { }
   
   ~RecursiveFibonacci() { };
 
@@ -29,6 +34,9 @@ public:
 
   long long int val() { return val_; }
   const long long int val() const { return val_; }
+
+  long long int elapsed() { return elapsed_; }
+  const long long int elapsed() const { return elapsed_; }
  
   void set_algorithm(Algorithm algorithm) { algorithm_ = algorithm; }
   Algorithm algorithm() { return algorithm_; }
@@ -42,6 +50,7 @@ public:
 
   //-- compute nth fibonacci number --//
   void run() {
+    auto start_time = std::chrono::system_clock::now();
     switch(algorithm_) {
       case Algorithm::CXX: 
         val_ = fibb_cxx(n_); 
@@ -58,12 +67,16 @@ public:
       case Algorithm::SERIAL: throw std::runtime_error("Algorithm SERIAL not implemented yet!"); break;
       default: throw std::invalid_argument("Specified algorithm does not exist!"); break;
     }
+    auto end_time = std::chrono::system_clock::now();
+    
+    elapsed_ = std::chrono::duration_cast<std::chrono::milliseconds>(end_time 
+      - start_time).count();
   }
 
 private:
   static long long int fibb_cxx(long long int n) {
 	  //sleep(rand()%3+1);
-	  int tmp = work_function(100);
+	  int tmp = work_function(25);
     if(n <= 1) { 
 		  return n + tmp - tmp; 
 	  } else {
@@ -74,7 +87,7 @@ private:
   }
 
   static long long int fibo_openmp(long long int n) {
-	  int tmp = work_function(100);
+	  int tmp = work_function(25);
     if(n <= 1) {
       return n + tmp - tmp;
     } else {
