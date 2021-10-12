@@ -5,8 +5,8 @@ SRCDIR = src
 OBJDIR = obj
 BINDIR = bin
 
-CFLAGS=-I. -I$(SRCDIR) -O3 -g
-LDFLAGS=-lpthread
+CFLAGS=-I. -I$(SRCDIR) -O3 -g -fopenmp
+LDFLAGS=-lpthread -fopenmp
 
 rm = rm
 
