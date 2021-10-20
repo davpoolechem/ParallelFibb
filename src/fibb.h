@@ -77,18 +77,18 @@ public:
 private:
   static long long int fibb_cxx(long long int n) {
 	  //sleep(rand()%3+1);
-	  int tmp = work_function(25);
+	  int tmp = work_function(100);
     if(n <= 1) { 
 		  return n + tmp - tmp; 
 	  } else {
 		  auto tmpn1 = std::async(fibb_cxx, n-1); 
 		  auto tmpn2 = std::async(fibb_cxx, n-2); 
-		  return tmpn1.get() + tmpn2.get();
+		  return tmpn1.get() + tmpn2.get() + tmp - tmp;
   	}
   }
 
   static long long int fibo_openmp(long long int n) {
-	  int tmp = work_function(25);
+	  int tmp = work_function(100);
     if(n <= 1) {
       return n + tmp - tmp;
     } else {
@@ -103,16 +103,16 @@ private:
       }
       #pragma omp taskwait
 
-      return tmp1 + tmp2;
+      return tmp1 + tmp2 + tmp - tmp;
     }
   }
 
   static long long int fibo_serial(long long int n) {
-	  int tmp = work_function(25);
+	  int tmp = work_function(100);
     if(n <= 1) {
       return n + tmp - tmp;
     } else {
-      return fibo_serial(n-1) + fibo_serial(n-2);
+      return fibo_serial(n-1) + fibo_serial(n-2) + tmp - tmp;
     }
   }
   
