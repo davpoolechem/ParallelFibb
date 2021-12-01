@@ -16,7 +16,7 @@ class RecursiveFibonacci {
 public:
   //-- constructors and destructors --//
   RecursiveFibonacci(long long int n, Algorithm algorithm=Algorithm::CXX) 
-  : n_(n), val_(0), elapsed_(0.0) 
+  : n_(n), val_(0), elapsed_(0.0), algorithm_(nullptr) 
   {
     switch(algorithm) {
       case Algorithm::CXX: 

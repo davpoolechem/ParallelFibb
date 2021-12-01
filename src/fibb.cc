@@ -8,12 +8,12 @@ int main(int argc, char* argv[]) {
   long long int n = atoll(argv[1]);	
 
   std::unordered_map<Algorithm, std::string> algorithms; 
-  algorithms[Algorithm::CXX] = "CXX";
+  //algorithms[Algorithm::CXX] = "CXX";
   algorithms[Algorithm::OPENMP] = "OPENMP";
   algorithms[Algorithm::SERIAL] = "SERIAL";
   
   for (auto algorithm : algorithms) {
-    RecursiveFibonacci fibb_eng = RecursiveFibonacci(n-1, algorithm.first);
+    RecursiveFibonacci fibb_eng(n-1, algorithm.first);
     fibb_eng.run();
    
     std::cout << "The " << n << "th number of the Fibonacci series using the "

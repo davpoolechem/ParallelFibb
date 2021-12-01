@@ -16,9 +16,7 @@ protected:
 public:
   virtual ~RecursiveFibonacciAlgorithm() = default;
   
-  virtual long long int compute_fibb(long long int n) {
-    throw std::runtime_error("Please pick a choice of CXX algorithm.");   
-  }; 
+  virtual long long int compute_fibb(long long int n) = 0; 
 
   Algorithm algorithm() { return algorithm_; }
   const Algorithm algorithm() const { return algorithm_; }
@@ -53,7 +51,7 @@ public:
     #define IMPL false 
     #if IMPL
     //sleep(rand()%3+1);
-    int tmp = work_function(100);
+    int tmp = work_function(0);
     if(n <= 1) { 
       return n + tmp - tmp;
     } else {
@@ -97,7 +95,7 @@ public:
 
 private:
   long long int compute_fibb_impl(long long int n) {
-    int tmp = work_function(100);
+    int tmp = work_function(0);
     if(n <= 1) {
       return n + tmp - tmp;
     } else {
@@ -124,7 +122,7 @@ public:
   SerialAlgorithm(SerialAlgorithm&&) = default;
 
   virtual long long int compute_fibb(long long int n) override {
-    int tmp = work_function(100);
+    int tmp = work_function(0);
     if(n <= 1) {
       return n + tmp - tmp;
     } else {
